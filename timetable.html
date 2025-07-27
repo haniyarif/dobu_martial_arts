@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Timetable | DoBu Martial Arts</title>
+  <style>
+     * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #000000, #4b0000);
+    color: #eee;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    #header.scrolled {
+      background: #0b0b0bcc;
+      box-shadow: 0 2px 15px rgba(178, 34, 34, 0.75);
+    }
+
+    #logo img.logo {
+      height: 60px;
+      filter: drop-shadow(0 0 5px #b22222);
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #eee;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      position: relative;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a.active {
+      color: #ff4c4c;
+      border-bottom: 2px solid #ff4c4c;
+    }
+
+    .nav-menu li a:hover,
+    .nav-menu li a:focus {
+      color: #ff4c4c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 0;
+      min-width: 160px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 15px #b22222;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      display: block;
+      font-weight: 600;
+      color: #eee;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a:focus {
+      background: #ff4c4c;
+      color: #0b0b0b;
+    }
+    
+    main {
+      padding: 80px 20px 40px; /* pushes content below nav */
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #ff4d4d;
+      text-shadow: 0 0 10px #ff1a1a;
+    }
+
+    .description {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+      color: #ddd;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #7a1414;
+      color: #fff;
+      font-size: 1em;
+      border-bottom: 2px solid #990000;
+    }
+
+    td {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: #f5f5f5;
+      transition: background 0.3s;
+    }
+
+    tr:hover td {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .jiujitsu { background-color: rgba(0, 128, 255, 0.15); }
+    .karate { background-color: rgba(255, 128, 0, 0.15); }
+    .judo { background-color: rgba(255, 255, 0, 0.15); }
+    .muaythai { background-color: rgba(128, 0, 128, 0.15); }
+    .fitness { background-color: rgba(0, 255, 0, 0.15); }
+    .kids { background-color: rgba(255, 0, 128, 0.15); }
+
+    .note {
+      text-align: center;
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 15px;
+    }
+
+  footer {
+      background: black;
+      padding: 35px 20px;
+      text-align: center;
+      color: #ddd;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 -6px 18px rgba(178, 34, 34, 0.9);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    footer .icon {
+      vertical-align: middle;
+      width: 22px;
+      margin-right: 10px;
+      filter: brightness(1.3);
+    }
+
+    footer a {
+      color: #ff4c4c;
+      margin: 0 12px;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+
+  @media (max-width: 768px) {
+    .nav-menu {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    table.timetable thead {
+      font-size: 0.9rem;
+    }
+
+    table.timetable tbody td {
+      font-size: 0.9rem;
+      padding: 10px 8px;
+    }
+  }
+  </style>
+</head>
+<body class="timetable-page">
+
+  <header id="header">
+  <div id="logo">
+    <img src="images/logo.png" alt="DoBu Martial Arts Logo" class="logo" />
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li class="dropdown">
+            <a href="classes.html">Classes</a>
+            <ul class="dropdown-menu">
+              <li><a href="classes.html#jiujitsu">Jiu-jitsu</a></li>
+              <li><a href="classes.html#karate">Karate</a></li>
+              <li><a href="classes.html#judo">Judo</a></li>
+              <li><a href="classes.html#muaythai">Muay Thai</a></li>
+              <li><a href="classes.html#kids">Kids Classes</a></li>
+            </ul>
+          </li>
+          <li><a href="timetable.html" class="active" aria-current="page">Timetable</a></li>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="book-private.html">Book</a></li>
+          <li><a href="membership.html#login">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+   <main>
+    <h2>Weekly Timetable</h2>
+    <p class="description">
+      Discover our weekly martial arts and fitness class schedule. Every session is led by expert coaches and designed for progress.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Class</th>
+          <th>Instructor</th>
+          <th>Room</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td>6:00 PM – 7:00 PM</td>
+          <td class="jiujitsu">Jiu-jitsu</td>
+          <td>Mauricio</td>
+          <td>Dojo A</td>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td>7:00 PM – 8:00 PM</td>
+          <td class="fitness">Fitness Training</td>
+          <td>Traci</td>
+          <td>Fitness Room</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td>6:00 PM – 7:00 PM</td>
+          <td class="karate">Karate</td>
+          <td>Sarah</td>
+          <td>Dojo B</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>5:00 PM – 6:00 PM</td>
+          <td class="kids">Kids Class</td>
+          <td>Morris</td>
+          <td>Dojo A</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>6:00 PM – 7:00 PM</td>
+          <td class="judo">Judo</td>
+          <td>Guy</td>
+          <td>Dojo B</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td>6:00 PM – 7:00 PM</td>
+          <td class="muaythai">Muay Thai</td>
+          <td>Morris</td>
+          <td>Dojo A</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td>5:00 PM – 6:00 PM</td>
+          <td class="fitness">Fitness Circuit</td>
+          <td>Harpreet</td>
+          <td>Fitness Room</td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td>10:00 AM – 11:00 AM</td>
+          <td class="jiujitsu">Jiu-jitsu</td>
+          <td>Mauricio</td>
+          <td>Dojo A</td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td>Closed</td>
+          <td colspan="3">Rest & Recovery Day</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="note">* Please arrive 10 minutes early and bring appropriate gear. Schedule may vary during holidays.</p>
+  </main>
+
+  <footer>
+    <p>© 2025 DoBu Martial Arts</p>
+    <p>
+      <img src="images/phone.png" alt="Phone Icon" class="icon" />
+      123-456-7890 &nbsp;&nbsp;
+      <img src="images/email.png" alt="Email Icon" class="icon" />
+      info@dobumartialarts.com
+    </p>
+    <p>
+      Follow us:
+      <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+        <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+      </a>
+      <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+        <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+      </a>
+      <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+        <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+      </a>
+    </p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

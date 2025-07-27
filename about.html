@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | DoBu Martial Arts</title>
+  <style>
+     * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #000000, #660000);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    #header.scrolled {
+      background: #0b0b0bcc;
+      box-shadow: 0 2px 15px rgba(178, 34, 34, 0.75);
+    }
+
+    #logo img.logo {
+      height: 60px;
+      filter: drop-shadow(0 0 5px #b22222);
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #eee;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      position: relative;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a.active {
+      color: #ff4c4c;
+      border-bottom: 2px solid #ff4c4c;
+    }
+
+    .nav-menu li a:hover,
+    .nav-menu li a:focus {
+      color: #ff4c4c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 0;
+      min-width: 160px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 15px #b22222;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      display: block;
+      font-weight: 600;
+      color: #eee;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a:focus {
+      background: #ff4c4c;
+      color: #0b0b0b;
+    }
+ main {
+      max-width: 1000px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+
+    h2, h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    section#about {
+      margin-bottom: 40px;
+    }
+
+    section#about ul {
+      list-style: disc;
+      margin-left: 20px;
+    }
+
+    section#coaches {
+      margin-bottom: 60px;
+    }
+
+    .coach {
+      background-color: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .coach img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .coach h3 {
+      color: #fff;
+      margin: 10px 0 5px;
+    }
+
+    .coach p {
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .coach ul {
+      list-style: circle;
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    #about h2 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #ff4d4d;
+  text-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff1a1a, 0 0 30px #990000;
+  margin-bottom: 20px;
+}
+
+#about ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+#about ul li {
+  background: #1a1a1a;
+  border-left: 6px solid #ff4d4d;
+  padding: 10px 15px;
+  margin: 10px 0;
+  color: #fff;
+  font-size: 1.1em;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.facilities-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.facilities-images img {
+  width: 300px;
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
+}
+
+footer {
+      background: black;
+      padding: 35px 20px;
+      text-align: center;
+      color: #ddd;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 -6px 18px rgba(178, 34, 34, 0.9);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    footer .icon {
+      vertical-align: middle;
+      width: 22px;
+      margin-right: 10px;
+      filter: brightness(1.3);
+    }
+
+    footer a {
+      color: #ff4c4c;
+      margin: 0 12px;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <header id="header">
+  <div id="logo">
+    <img src="images/logo.png" alt="DoBu Martial Arts Logo" class="logo" />
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="classes.html">Classes</a>
+        <ul class="dropdown-menu">
+          <li><a href="classes.html#jiujitsu">Jiu-jitsu</a></li>
+          <li><a href="classes.html#karate">Karate</a></li>
+          <li><a href="classes.html#judo">Judo</a></li>
+          <li><a href="classes.html#muaythai">Muay Thai</a></li>
+          <li><a href="classes.html#kids">Kids Classes</a></li>
+        </ul>
+      </li>
+      <li><a href="timetable.html">Timetable</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="book-private.html">Book</a></li>
+      <li><a href="membership.html#login">Login</a></li>
+    </ul>
+  </nav>
+</header>
+  <main>
+
+    <section id="about">
+  <h2>About DoBu Martial Arts</h2>
+  <p>We are a professional martial arts and fitness gym offering expert training in a friendly, supportive environment. Whether you're here for self-defence, competition, or fitness, we have a class and coach for you.</p>
+
+  <h3>Our Facilities</h3>
+  <ul>
+    <li>Large matted martial arts area</li>
+    <li>Fully-equipped fitness gym</li>
+    <li>Sauna & steam room</li>
+    <li>Changing and shower rooms</li>
+  </ul>
+
+  <div class="facilities-images">
+    <img src="images/fitness-room.jpg" alt="Fitness Room">
+    <img src="images/sauna.jpg" alt="Sauna and Steam Room">
+  </div>
+</section>
+
+    <section id="coaches">
+      <h2>Meet Our Instructors</h2>
+
+      <div class="coach">
+        <img src="images/mauricio.jpg" alt="Mauricio Gomez">
+        <h3>Mauricio Gomez</h3>
+        <p>Gym Owner & Head Martial Arts Coach</p>
+        <ul>
+          <li>4th Dan Blackbelt – Judo</li>
+          <li>3rd Dan Blackbelt – Jiu-jitsu</li>
+          <li>1st Dan Blackbelt – Karate</li>
+          <li>Accredited Muay Thai Coach</li>
+        </ul>
+      </div>
+
+      <div class="coach">
+        <img src="images/sarah.jpg" alt="Sarah Nova">
+        <h3>Sarah Nova</h3>
+        <p>Assistant Martial Arts Coach</p>
+        <ul>
+          <li>5th Dan Blackbelt – Karate</li>
+        </ul>
+      </div>
+
+      <div class="coach">
+        <img src="images/guy.jpg" alt="Guy Victory">
+        <h3>Guy Victory</h3>
+        <p>Assistant Martial Arts Coach</p>
+        <ul>
+          <li>2nd Dan Blackbelt – Jiu-jitsu</li>
+          <li>1st Dan Blackbelt – Judo</li>
+        </ul>
+      </div>
+
+      <div class="coach">
+        <img src="images/morris.jpg" alt="Morris Davis">
+        <h3>Morris Davis</h3>
+        <p>Assistant Martial Arts Coach</p>
+        <ul>
+          <li>3rd Dan Blackbelt – Karate</li>
+          <li>Accredited Muay Thai Coach</li>
+        </ul>
+      </div>
+
+      <div class="coach">
+        <img src="images/traci.jpg" alt="Traci Santiago">
+        <h3>Traci Santiago</h3>
+        <p>Fitness Coach</p>
+        <ul>
+          <li>BSc in Sports Science</li>
+          <li>Expert in strength & conditioning</li>
+        </ul>
+      </div>
+
+      <div class="coach">
+        <img src="images/harpreet.jpg" alt="Harpreet Kaur">
+        <h3>Harpreet Kaur</h3>
+        <p>Fitness Coach</p>
+        <ul>
+          <li>BSc in Physiotherapy</li>
+          <li>MSc in Sports Science</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+   <footer>
+  <p>© 2025 DoBu Martial Arts</p>
+  <p>
+    <img src="images/phone.png" alt="Phone Icon" class="icon" />
+    123-456-7890 &nbsp;&nbsp;
+    <img src="images/email.png" alt="Email Icon" class="icon" />
+    info@dobumartialarts.com
+  </p>
+  <p>
+    Follow us:
+    <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+    </a>
+    <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+    </a>
+    <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+    </a>
+  </p>
+</footer>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>

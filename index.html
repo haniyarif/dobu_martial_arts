@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>DoBu Martial Arts | Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #000000, #660000);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    #header.scrolled {
+      background: #0b0b0bcc;
+      box-shadow: 0 2px 15px rgba(178, 34, 34, 0.75);
+    }
+
+    #logo img.logo {
+      height: 60px;
+      filter: drop-shadow(0 0 5px #b22222);
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #eee;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      position: relative;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a.active {
+      color: #ff4c4c;
+      border-bottom: 2px solid #ff4c4c;
+    }
+
+    .nav-menu li a:hover,
+    .nav-menu li a:focus {
+      color: #ff4c4c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 0;
+      min-width: 160px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 15px #b22222;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      display: block;
+      font-weight: 600;
+      color: #eee;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a:focus {
+      background: #ff4c4c;
+      color: #0b0b0b;
+    }
+
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: url('images/hero-banner.jpeg') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 30px 40px;
+      overflow: hidden;
+    }
+
+    #hero .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(178, 34, 34, 0.7), rgba(11, 11, 11, 0.85));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      max-width: 900px;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 8px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px #ff4c4c;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 35px;
+      font-weight: 600;
+      color: #ffbbbb;
+      text-shadow: 0 0 8px #b22222;
+    }
+
+    .btn-primary {
+      background: #ff4c4c;
+      color: #0b0b0b;
+      padding: 15px 40px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 0 20px #ff4c4c88;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: #b22222;
+      box-shadow: 0 0 30px #b22222cc;
+      outline: none;
+      color: #fff;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 100px auto 100px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    main section {
+      background: #111;
+      border-radius: 16px;
+      padding: 30px 25px;
+      box-shadow: 0 0 30px rgba(255, 76, 76, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    main section:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 40px #ff4c4c;
+    }
+
+    main h3 {
+      font-weight: 900;
+      color: #ff4c4c;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 1.8rem;
+    }
+
+    main p,
+    main ul {
+      color: #ddd;
+      font-weight: 500;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    main ul {
+      padding-left: 20px;
+    }
+
+    main ul li {
+      margin-bottom: 10px;
+    }
+
+    main a {
+      color: #ff4c4c;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    main a:hover,
+    main a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+
+    footer {
+      background: black;
+      padding: 35px 20px;
+      text-align: center;
+      color: #ddd;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 -6px 18px rgba(178, 34, 34, 0.9);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    footer .icon {
+      vertical-align: middle;
+      width: 22px;
+      margin-right: 10px;
+      filter: brightness(1.3);
+    }
+
+    footer a {
+      color: #ff4c4c;
+      margin: 0 12px;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      #header {
+        padding: 15px 25px;
+      }
+
+      .nav-menu {
+        gap: 25px;
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        margin: 40px auto 80px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #header {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <div id="logo">
+    <img src="https://haniyarif.github.io/dobu_martial_arts/images/logo.png" alt="Logo">
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li class="dropdown">
+        <a href="classes.html">Classes</a>
+        <ul class="dropdown-menu">
+          <li><a href="classes.html#jiujitsu">Jiu-jitsu</a></li>
+          <li><a href="classes.html#karate">Karate</a></li>
+          <li><a href="classes.html#judo">Judo</a></li>
+          <li><a href="classes.html#muaythai">Muay Thai</a></li>
+          <li><a href="classes.html#kids">Kids Classes</a></li>
+        </ul>
+      </li>
+      <li><a href="timetable.html">Timetable</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="book-private.html">Book</a></li>
+      <li><a href="membership.html#login">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>Train. Grow. Succeed.</h1>
+    <p>Welcome to DoBu Martial Arts — your journey begins here.</p>
+    <a href="membership.html" class="btn-primary">Join Now</a>
+  </div>
+</section>
+
+<main>
+
+  <section id="about">
+    <h3>About DoBu Martial Arts</h3>
+    <p>At DoBu Martial Arts, we believe in the transformative power of martial discipline. Located in the heart of the community, our dojo is a hub for personal growth, physical fitness, and lifelong learning. We cater to all levels — from absolute beginners to seasoned fighters — and provide a respectful, empowering environment to train in.</p>
+  </section>
+
+  <section id="arts">
+    <h3>Martial Arts We Offer</h3>
+    <ul>
+      <li>Jiu-jitsu</li>
+      <li>Karate</li>
+      <li>Judo</li>
+      <li>Muay Thai</li>
+      <li>Kids Martial Arts</li>
+      <li>Fitness Conditioning</li>
+    </ul>
+  </section>
+
+  <section id="memberships">
+    <h3>Membership Options</h3>
+    <ul>
+      <li>Basic – £25/month</li>
+      <li>Intermediate – £35/month</li>
+      <li>Advanced – £45/month</li>
+      <li>Elite – £60/month</li>
+      <li>Junior – £25/month</li>
+      <li>Private tuition – £15/hour</li>
+    </ul>
+  </section>
+
+  <section id="timetable-preview">
+    <h3>Class Timetable Preview</h3>
+    <p><a href="timetable.html">View Full Timetable</a></p>
+  </section>
+
+  <section id="coaches">
+    <h3>Meet Our Coaches</h3>
+    <p><a href="about.html">See Our Instructors</a></p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 DoBu Martial Arts</p>
+  <p>
+    <img src="images/phone.png" alt="Phone Icon" class="icon" />
+    123-456-7890 &nbsp;&nbsp;
+    <img src="images/email.png" alt="Email Icon" class="icon" />
+    info@dobumartialarts.com
+  </p>
+  <p>
+    Follow us:
+    <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+    </a>
+    <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+    </a>
+    <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+    </a>
+  </p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

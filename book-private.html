@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Private Session | DoBu Martial Arts</title>
+  <style>
+     * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #000000, #660000);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    #header.scrolled {
+      background: #0b0b0bcc;
+      box-shadow: 0 2px 15px rgba(178, 34, 34, 0.75);
+    }
+
+    #logo img.logo {
+      height: 60px;
+      filter: drop-shadow(0 0 5px #b22222);
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #eee;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      position: relative;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a.active {
+      color: #ff4c4c;
+      border-bottom: 2px solid #ff4c4c;
+    }
+
+    .nav-menu li a:hover,
+    .nav-menu li a:focus {
+      color: #ff4c4c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 0;
+      min-width: 160px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 15px #b22222;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      display: block;
+      font-weight: 600;
+      color: #eee;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a:focus {
+      background: #ff4c4c;
+      color: #0b0b0b;
+    }
+    main {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+main h2 {
+  color: white;
+  text-shadow: 0 0 10px red;
+  margin-bottom: 30px;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  background-color: #1a1a1a;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+  color: white;
+  text-align: left;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+form button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: darkred;
+}
+
+main p {
+  font-weight: bold;
+  margin-top: 20px;
+  color: #fff;
+}
+
+footer {
+      background: black;
+      padding: 35px 20px;
+      text-align: center;
+      color: #ddd;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 -6px 18px rgba(178, 34, 34, 0.9);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    footer .icon {
+      vertical-align: middle;
+      width: 22px;
+      margin-right: 10px;
+      filter: brightness(1.3);
+    }
+
+    footer a {
+      color: #ff4c4c;
+      margin: 0 12px;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header id="header">
+  <div id="logo">
+    <img src="images/logo.png" alt="DoBu Martial Arts Logo" class="logo" />
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="classes.html">Classes</a>
+        <ul class="dropdown-menu">
+          <li><a href="classes.html#jiujitsu">Jiu-jitsu</a></li>
+          <li><a href="classes.html#karate">Karate</a></li>
+          <li><a href="classes.html#judo">Judo</a></li>
+          <li><a href="classes.html#muaythai">Muay Thai</a></li>
+          <li><a href="classes.html#kids">Kids Classes</a></li>
+          <li><a href="classes.html#fitness">Fitness Training</a></li>
+        </ul>
+      </li>
+      <li><a href="timetable.html">Timetable</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="book-private.html">Book</a></li>
+      <li><a href="membership.html#login">Login</a></li>
+    </ul>
+  </nav>
+</header>
+<br>
+  <main>
+    <h2>Book a Private Session</h2>
+
+    <form action="submit_booking.php" method="POST">
+      <label for="name">Full Name:</label><br />
+      <input type="text" id="name" name="name" required /><br />
+
+      <label for="martial-art">Martial Art:</label><br />
+      <select id="martial-art" name="martial-art" required>
+        <option value="">--Select--</option>
+        <option value="jiujitsu">Jiu-jitsu</option>
+        <option value="karate">Karate</option>
+        <option value="judo">Judo</option>
+        <option value="muaythai">Muay Thai</option>
+        <option value="fitness">Fitness Training</option>
+      </select><br />
+
+      <label for="coach">Preferred Coach:</label><br />
+      <select id="coach" name="coach" required>
+        <option value="">--Select--</option>
+        <option value="mauricio">Mauricio Gomez</option>
+        <option value="sarah">Sarah Nova</option>
+        <option value="guy">Guy Victory</option>
+        <option value="morris">Morris Davis</option>
+        <option value="traci">Traci Santiago</option>
+        <option value="harpreet">Harpreet Kaur</option>
+      </select><br />
+
+      <label for="date">Preferred Date:</label><br />
+      <input type="date" id="date" name="date" required /><br />
+
+      <label for="time">Preferred Time Slot:</label><br />
+      <input type="time" id="time" name="time" required /><br /><br />
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+
+    <p>Price: £15 per hour – Pay at the gym</p>
+  </main>
+
+ <footer>
+  <p>© 2025 DoBu Martial Arts</p>
+  <p>
+    <img src="images/phone.png" alt="Phone Icon" class="icon" />
+    123-456-7890 &nbsp;&nbsp;
+    <img src="images/email.png" alt="Email Icon" class="icon" />
+    info@dobumartialarts.com
+  </p>
+  <p>
+    Follow us:
+    <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+    </a>
+    <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+    </a>
+    <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+    </a>
+  </p>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

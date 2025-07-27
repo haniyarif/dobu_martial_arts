@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us | DoBu Martial Arts</title>
+  <style>
+     * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #000000, #660000);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    #header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 9999;
+    }
+
+    #header.scrolled {
+      background: #0b0b0bcc;
+      box-shadow: 0 2px 15px rgba(178, 34, 34, 0.75);
+    }
+
+    #logo img.logo {
+      height: 60px;
+      filter: drop-shadow(0 0 5px #b22222);
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      color: #eee;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      position: relative;
+      padding: 6px 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu li a.active {
+      color: #ff4c4c;
+      border-bottom: 2px solid #ff4c4c;
+    }
+
+    .nav-menu li a:hover,
+    .nav-menu li a:focus {
+      color: #ff4c4c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px 0;
+      min-width: 160px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 15px #b22222;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dropdown-menu li a {
+      padding: 12px 25px;
+      display: block;
+      font-weight: 600;
+      color: #eee;
+      text-decoration: none;
+      transition: background-color 0.25s ease;
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a:focus {
+      background: #ff4c4c;
+      color: #0b0b0b;
+    }
+
+    main {
+  max-width: 700px;
+  padding: 140px 20px 60px; /* Top padding adjusted */
+  margin: 0 auto;
+}
+
+  h2 {
+    text-align: center;
+    color: #ff4c4c;
+    margin-bottom: 30px;
+  }
+  h3 {
+    color: #ff4c4c;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff4c4c;
+    padding-bottom: 5px;
+  }
+
+  /* Contact form */
+  #contact-form form {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #b22222;
+  }
+  #contact-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  #contact-form input[type="text"],
+  #contact-form input[type="email"],
+  #contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: none;
+    background: #2c2c2c;
+    color: #eee;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  #contact-form input[type="text"]:focus,
+  #contact-form input[type="email"]:focus,
+  #contact-form textarea:focus {
+    outline: 2px solid #ff4c4c;
+    background: #3a3a3a;
+  }
+  #contact-form button {
+    background-color: #ff4c4c;
+    border: none;
+    color: #0b0b0b;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #contact-form button:hover,
+  #contact-form button:focus {
+    background-color: #b22222;
+    outline: none;
+  }
+
+  /* Location and contact sections */
+  #location-info p,
+  #contact-details p {
+    line-height: 1.6;
+    margin: 8px 0;
+  }
+
+  /* Social icons */
+  .icon.social-icon {
+    width: 28px;
+    height: 28px;
+    margin-left: 8px;
+    vertical-align: middle;
+    filter: brightness(1.2);
+    transition: filter 0.3s ease;
+  }
+  .icon.social-icon:hover,
+  .icon.social-icon:focus {
+    filter: brightness(1.5) drop-shadow(0 0 3px #ff4c4c);
+  }
+
+  footer {
+      background: black;
+      padding: 35px 20px;
+      text-align: center;
+      color: #ddd;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 -6px 18px rgba(178, 34, 34, 0.9);
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    footer .icon {
+      vertical-align: middle;
+      width: 22px;
+      margin-right: 10px;
+      filter: brightness(1.3);
+    }
+
+    footer a {
+      color: #ff4c4c;
+      margin: 0 12px;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #b22222;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+ <header id="header">
+  <div id="logo">
+    <img src="images/logo.png" alt="DoBu Martial Arts Logo" class="logo" />
+  </div>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="classes.html">Classes</a>
+        <ul class="dropdown-menu">
+          <li><a href="classes.html#jiujitsu">Jiu-jitsu</a></li>
+          <li><a href="classes.html#karate">Karate</a></li>
+          <li><a href="classes.html#judo">Judo</a></li>
+          <li><a href="classes.html#muaythai">Muay Thai</a></li>
+          <li><a href="classes.html#kids">Kids Classes</a></li>
+        </ul>
+      </li>
+      <li><a href="timetable.html">Timetable</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="book-private.html">Book</a></li>
+      <li><a href="membership.html#login">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+    <h2>Get In Touch</h2>
+
+    <section id="contact-form">
+      <form action="submit_contact.php" method="POST">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="5" required></textarea><br />
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section id="location-info">
+      <h3>Gym Address & Opening Hours</h3>
+      <p>123 Martial Arts Lane<br />Sportstown, ST 12345</p>
+      <p>Opening Hours:<br />
+        Mon–Fri: 6:00 AM – 9:00 PM<br />
+        Sat: 8:00 AM – 6:00 PM<br />
+        Sun: Closed
+      </p>
+    </section>
+
+    <section id="contact-details">
+      <h3>Contact Us!</h3>
+      <p>Phone: 123-456-7890</p>
+      <p>Email: info@dobumartialarts.com</p>
+      <p>Follow us on: <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+    </a>
+    <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+    </a>
+    <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+    </a>
+  </p>
+    </section>
+  </main>
+
+  <footer>
+  <p>© 2025 DoBu Martial Arts</p>
+  <p>
+    <img src="images/phone.png" alt="Phone Icon" class="icon" />
+    123-456-7890 &nbsp;&nbsp;
+    <img src="images/email.png" alt="Email Icon" class="icon" />
+    info@dobumartialarts.com
+  </p>
+  <p>
+    Follow us:
+    <a href="https://www.facebook.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/facebook.png" alt="Facebook" class="icon social-icon" />
+    </a>
+    <a href="https://www.instagram.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/instagram.png" alt="Instagram" class="icon social-icon" />
+    </a>
+    <a href="https://twitter.com/dobumartialarts" target="_blank" rel="noopener">
+      <img src="images/x.png" alt="X (Twitter)" class="icon social-icon" />
+    </a>
+  </p>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
